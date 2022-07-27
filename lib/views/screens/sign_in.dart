@@ -3,7 +3,6 @@ import 'package:get/get.dart';
 import 'package:ubenwa_damilare/views/screens/home_screen.dart';
 import 'package:ubenwa_damilare/views/widgets/bottons.dart';
 import 'package:ubenwa_damilare/views/widgets/snackbar.dart';
-
 import '../../controllers/user_controller.dart';
 import '../../core/app_colors.dart';
 import '../../core/consts.dart';
@@ -89,19 +88,14 @@ class _SignInScreenState extends State<SignInScreen> {
                           ),
                           Align(
                             alignment: Alignment.centerRight,
-                            child: InkWell(
-                              onTap: () {
-                                // Get.to(() => ResetPassword());
-                              },
-                              child: Padding(
-                                padding: const EdgeInsets.all(3.0),
-                                child: Text('Forgot Password?',
-                                    style: TextStyle(
-                                        fontSize: 11,
-                                        color: AppColors.PRIMARY,
-                                        decoration: TextDecoration.underline,
-                                        fontWeight: FontWeight.w500)),
-                              ),
+                            child: Padding(
+                              padding: const EdgeInsets.all(3.0),
+                              child: Text('Forgot Password?',
+                                  style: TextStyle(
+                                      fontSize: 11,
+                                      color: AppColors.PRIMARY,
+                                      decoration: TextDecoration.underline,
+                                      fontWeight: FontWeight.w500)),
                             ),
                           ),
                           SizedBox(height: height(context) * 0.03),
@@ -158,7 +152,6 @@ class _SignInScreenState extends State<SignInScreen> {
     var response = await AuthenticationServices.login(
         emailController.text, passwordController.text);
     Get.back();
-    print(response);
     if (response is String) {
       SnackBars.showErrorSnackBar('Oops!', response);
     } else {

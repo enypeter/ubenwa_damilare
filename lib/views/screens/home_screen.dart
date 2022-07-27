@@ -8,7 +8,6 @@ import 'package:ubenwa_damilare/core/app_colors.dart';
 import 'package:ubenwa_damilare/core/consts.dart';
 
 import '../../controllers/user_controller.dart';
-import '../../services/new_born_services.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -23,7 +22,7 @@ class _HomeScreenState extends State<HomeScreen> {
   NewBornController babyController = Get.put(NewBornController());
   String token = '';
   String name = '';
-  bool isEnableBackground = true;
+  bool isEnableBackground = false;
   var newBabies;
 
   @override
@@ -86,75 +85,70 @@ class _HomeScreenState extends State<HomeScreen> {
               Expanded(
                 child: newBabies == null
                     ? const Center(child: CircularProgressIndicator.adaptive())
-                    : RefreshIndicator(
-                        onRefresh: () => getNewBabies(),
-                        child: ListView.separated(
-                            shrinkWrap: true,
-                            itemBuilder: (c, i) {
-                              var item = newBabies[i];
-                              return Container(
-                                color: AppColors.GREEN.withOpacity(0.5),
-                                padding: const EdgeInsets.only(left: 6),
-                                child: Container(
-                                  decoration: BoxDecoration(
-                                      color: AppColors.WHITE,
-                                      borderRadius:
-                                          const BorderRadius.horizontal(
-                                              left: Radius.circular(10))),
-                                  child: Padding(
-                                    padding: const EdgeInsets.fromLTRB(
-                                        20, 15, 20, 15),
-                                    child: Column(
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.stretch,
-                                      children: [
-                                        Text(
-                                          item['attributes']['name'],
-                                          style: TextStyle(
-                                              fontSize: 20,
-                                              color: AppColors.TEXTCOLOR,
-                                              fontWeight: FontWeight.w700),
+                    : newBabies.isEmpty
+                        ? const Center(
+                            child:  Text(
+                              'You do not have any baby yet,\nenable service to create one',
+                              textAlign: TextAlign.center,
+                            ),
+                          )
+                        : RefreshIndicator(
+                            onRefresh: () => getNewBabies(),
+                            child: ListView.separated(
+                                shrinkWrap: true,
+                                itemBuilder: (c, i) {
+                                  var item = newBabies[i];
+                                  return Container(
+                                    color: AppColors.GREEN.withOpacity(0.5),
+                                    padding: const EdgeInsets.only(left: 6),
+                                    child: Container(
+                                      decoration: BoxDecoration(
+                                          color: AppColors.WHITE,
+                                          borderRadius:
+                                              const BorderRadius.horizontal(
+                                                  left: Radius.circular(10))),
+                                      child: Padding(
+                                        padding: const EdgeInsets.fromLTRB(
+                                            20, 15, 20, 15),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.stretch,
+                                          children: [
+                                            Text(
+                                              item['attributes']['name'],
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  color: AppColors.TEXTCOLOR,
+                                                  fontWeight: FontWeight.w700),
+                                            ),
+                                            tinyVerticalSpace(),
+                                            Text(
+                                              'Gender: ${item['attributes']['gender']}',
+                                              style: TextStyle(
+                                                  fontSize: 13,
+                                                  color: AppColors.GREY),
+                                            ),
+                                            tinyVerticalSpace(),
+                                            Text(
+                                              'Date of Birth: ${DateFormat.yMMMMEEEEd().format(DateTime.parse(item['attributes']['created_at']))}',
+                                              style:
+                                                  const TextStyle(fontSize: 13),
+                                            ),
+                                          ],
                                         ),
-                                        tinyVerticalSpace(),
-                                        Text(
-                                          'Gender: ${item['attributes']['gender']}',
-                                          style: TextStyle(
-                                              fontSize: 13,
-                                              color: AppColors.GREY),
-                                        ),
-                                        tinyVerticalSpace(),
-                                        Text(
-                                          'Date of Birth: ${DateFormat.yMMMMEEEEd().format(DateTime.parse(item['attributes']['created_at']))}',
-                                          style: const TextStyle(fontSize: 13),
-                                        ),
-                                      ],
+                                      ),
                                     ),
-                                  ),
-                                ),
-                              );
-                            },
-                            separatorBuilder: (c, i) =>
-                                const SizedBox(height: 15),
-                            itemCount: newBabies.length),
-                      ),
+                                  );
+                                },
+                                separatorBuilder: (c, i) =>
+                                    const SizedBox(height: 15),
+                                itemCount: newBabies.length),
+                          ),
               ),
             ],
           ),
         ),
       ),
     );
-  }
-
-  createNewBaby() async {
-    var response = await NewBornServices.createNewBorn(
-      name: 'Ifeoluwa Samson',
-      gestation: '6',
-      gender: 'male',
-    );
-    if (response is String) {
-    } else {
-      getNewBabies();
-    }
-    print(response);
   }
 }

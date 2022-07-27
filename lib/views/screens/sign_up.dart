@@ -170,7 +170,6 @@ class _SignUpScreenState extends State<SignUpScreen> {
         lastName: nameController.text.split(' ')[1],
         email: emailController.text,
         password: passwordController.text);
-    print(response);
     Get.back();
     if (response is String) {
       SnackBars.showErrorSnackBar('Oops!', response);

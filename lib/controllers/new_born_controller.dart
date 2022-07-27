@@ -17,7 +17,6 @@ class NewBornController extends GetxController {
 
   setNewBorn(token) async {
     var response = await NewBornServices.getNewBorn(token);
-    print(response);
     if (response is String) {
       return newBornList = null;
     } else {
