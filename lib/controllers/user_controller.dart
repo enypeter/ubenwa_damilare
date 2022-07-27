@@ -1,17 +1,22 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
 
-import '../model/model.dart';
+import '../model/user_model.dart';
 
 class UserController extends GetxController{
   UserModel? user;
   var token;
+  var userId;
 
   UserModel? getUser() {
     return user;
   }
 
   getToken() {
-    return this.token;
+    return token;
+  }
+  getUserId() {
+    return userId;
   }
 
   setUserDetails(response) async {
@@ -20,6 +25,10 @@ class UserController extends GetxController{
   }
 
   setToken(token)async{
+    await const FlutterSecureStorage().write(key:"token", value: token);
     this.token = token;
+  }
+  setUserId(userId)async{
+    this.userId = userId;
   }
 }

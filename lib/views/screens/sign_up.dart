@@ -83,7 +83,7 @@ class _SignUpScreenState extends State<SignUpScreen> {
                           InputFormField(
                             hint: '•••••••',
                             controller: passwordController,
-                            obscure: true,
+                            obscure: isObscure,
                             suffixIcon: _passwordVisibility(),
                             validator: (value) =>
                                 PasswordValidator.validate(value),
@@ -177,10 +177,11 @@ class _SignUpScreenState extends State<SignUpScreen> {
     } else {
       UserController userController =
           Get.put(UserController(), permanent: true);
-      var token = response['token'];
-      await userController.setUserDetails(response);
-      await userController.setToken(token);
+      await userController.setUserDetails(response['user_info']);
+      await userController.setToken(response['token']);
+      await userController.setUserId(response['user_id']);
       Get.offAll(() => const SuccessScreen());
+
     }
   }
 }

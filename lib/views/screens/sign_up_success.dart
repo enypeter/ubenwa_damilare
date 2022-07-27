@@ -45,7 +45,7 @@ class SuccessScreen extends StatelessWidget {
             ),
             SizedBox(height: height(context) * 0.1),
             Text(
-              'You are ready for \nan amazing experience with Ubenwa',
+              'Kindly Check your email for verification\nWelcome to an amazing experience with Ubenwa',
               textAlign: TextAlign.center,
               style: TextStyle(
                   fontWeight: FontWeight.w500,
