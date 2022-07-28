@@ -14,7 +14,8 @@ class InputFormField extends StatelessWidget {
     this.hint,
     this.textCapitalization = TextCapitalization.none,
     this.keyboardType,
-  });
+    Key?key
+  }): super(key: key);
 
   final suffixIcon;
   final onChanged;
