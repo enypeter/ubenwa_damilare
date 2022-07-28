@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:ubenwa_damilare/controllers/new_born_controller.dart';
 import 'package:ubenwa_damilare/core/app_colors.dart';
 import 'package:ubenwa_damilare/core/consts.dart';
+
 import '../../../controllers/user_controller.dart';
 import 'new_born_card.dart';
 
@@ -93,12 +94,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             onRefresh: () => getNewBabies(),
                             child: ListView.separated(
                                 shrinkWrap: true,
-                                itemBuilder: (c, i) {
-                                  var item = newBabies[i];
-                                  return NewBornCard(item);
-                                },
-                                separatorBuilder: (c, i) =>
-                                    const SizedBox(height: 15),
+                                itemBuilder: (c, i) => NewBornCard(newBabies[i]),
+                                separatorBuilder: (c, i) => smallVerticalSpace(),
                                 itemCount: newBabies.length),
                           ),
               ),

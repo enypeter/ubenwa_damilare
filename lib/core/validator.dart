@@ -5,7 +5,6 @@ class EmailValidator {
     if (value.isEmpty) {
       return emptyEmailField;
     }
-    // Regex for email validation
     final regExp = RegExp(emailRegex);
     if (regExp.hasMatch(value)) {
       return null;
@@ -34,7 +33,6 @@ class PasswordValidator {
       return passwordLengthError;
     }
 
-    // Regex for dot and comma validation
     final regExp = RegExp(symbolRegex);
     if (regExp.hasMatch(value)) {
       return null;

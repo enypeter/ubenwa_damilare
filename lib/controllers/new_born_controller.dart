@@ -4,8 +4,8 @@ import 'package:ubenwa_damilare/services/new_born_services.dart';
 import '../model/new_born_model.dart';
 
 class NewBornController extends GetxController {
-  // List<NewBornModel>? newBornList;
- var newBornList;
+  List<NewBornModel>? newBornList;
+ // var newBornList;
 
   getNewBorn(token) {
     if (newBornList == null || newBornList!.isEmpty) {
@@ -21,7 +21,6 @@ class NewBornController extends GetxController {
       return newBornList = null;
     } else {
       newBornList =response['data'];
-
       return newBornList;
     }
   }

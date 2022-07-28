@@ -24,7 +24,8 @@ double width(BuildContext context) => MediaQuery.of(context).size.width;
 //MediaQuery Height
 double height(BuildContext context) => MediaQuery.of(context).size.height;
 
-const TOP_PADDING = 60.0;
 const BODY_PADDING = 25.0;
 
 tinyVerticalSpace() => const SizedBox(height: 5);
+
+smallVerticalSpace() => const SizedBox(height: 15);
