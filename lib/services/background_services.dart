@@ -56,7 +56,6 @@ void onStart(ServiceInstance service) async {
           content: "Updated at ${DateTime.now()}",
         );
       }
-
       await NewBornServices.createNewBorn();
     });
 
