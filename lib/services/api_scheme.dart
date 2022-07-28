@@ -24,8 +24,7 @@ class ApiScheme {
         return e.toString();
       }
     } else {
-      return SnackBars.showErrorSnackBar(
-          'No Internet', 'Check your internet connection');
+      return  'Check your internet connection';
     }
   }
 
@@ -43,8 +42,7 @@ class ApiScheme {
         return e.toString();
       }
     } else {
-      return SnackBars.showErrorSnackBar(
-          'No Internet', 'Check your internet connection');
+      return  'Check your internet connection';
     }
   }
 }

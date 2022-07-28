@@ -138,6 +138,7 @@ class _SignUpFormState extends State<SignUpForm> {
                 : Icons.visibility_off_outlined,
             color: AppColors.DISABLEDCOLOR));
   }
+
   Future signUp() async {
     showLoading(context);
     var response = await AuthenticationServices.register(
@@ -145,6 +146,7 @@ class _SignUpFormState extends State<SignUpForm> {
         lastName: nameController.text.split(' ')[1],
         email: emailController.text,
         password: passwordController.text);
+    print(response);
     Get.back();
     if (response is String) {
       SnackBars.showErrorSnackBar('Oops!', response);

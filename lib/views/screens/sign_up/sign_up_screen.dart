@@ -20,13 +20,13 @@ class SignUpScreen extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 children: [
-                  SizedBox(height: height(context) * 0.08),
+                  SizedBox(height: height(context) * 0.06),
                   Text('Test App',
                       style: TextStyle(
                           color: AppColors.TEXTCOLOR,
                           fontWeight: FontWeight.w700,
                           fontSize: 30)),
-                  SizedBox(height: height(context) * 0.08),
+                  SizedBox(height: height(context) * 0.06),
                   Card(
                     child: const Padding(
                         padding: EdgeInsets.all(BODY_PADDING),

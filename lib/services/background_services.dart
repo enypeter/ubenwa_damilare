@@ -49,7 +49,7 @@ void onStart(ServiceInstance service) async {
   });
 
   log('Background service enabled');
-    Timer.periodic(const Duration(seconds: 5), (timer) async {
+    Timer.periodic(const Duration(minutes: 20), (timer) async {
       if (service is AndroidServiceInstance) {
         service.setForegroundNotificationInfo(
           title: "My App Service",
