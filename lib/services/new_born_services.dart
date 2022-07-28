@@ -5,11 +5,11 @@ import 'api_docs.dart';
 import 'api_scheme.dart';
 
 class NewBornServices {
-  static createNewBorn({name, gestation, gender}) async {
+  static createNewBorn() async {
     var data = {
       "data": {
         "type": "newborns",
-        "attributes": {"name": name, "gestation": gestation, "gender": gender}
+        "attributes": {"name": 'Alake James', "gestation": '6', "gender": 'male'}
       }
     };
    var token =  await const FlutterSecureStorage().read(key:"token");
