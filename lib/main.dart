@@ -16,7 +16,6 @@ Future<void> initializeService() async {
   await service.configure(
     androidConfiguration: AndroidConfiguration(
       onStart: onStart,
-
       autoStart: true,
       isForegroundMode: true,
     ),
@@ -50,11 +49,9 @@ void onStart(ServiceInstance service) async {
     service.stopSelf();
   });
 
-  var isEnabled = await const FlutterSecureStorage().read(
-    key: "enableBackground",
-  );
+  var isEnabled = await const FlutterSecureStorage().read(key: "enableBackground");
   if (isEnabled == 'true') {
-    Timer.periodic(const Duration(seconds: 2), (timer) async {
+    Timer.periodic(const Duration(minutes: 20), (timer) async {
       if (service is AndroidServiceInstance) {
         service.setForegroundNotificationInfo(
           title: "My App Service",

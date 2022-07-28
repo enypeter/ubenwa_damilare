@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:ubenwa_damilare/core/app_colors.dart';
-import 'package:ubenwa_damilare/views/screens/home_screen.dart';
-import '../../core/app_assets.dart';
-import '../../core/consts.dart';
+import 'package:ubenwa_damilare/views/screens/home/home_screen.dart';
+import '../../../core/app_assets.dart';
+import '../../../core/consts.dart';
 
 class SuccessScreen extends StatelessWidget {
    const SuccessScreen({Key? key}) : super(key: key);

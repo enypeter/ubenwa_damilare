@@ -24,7 +24,7 @@ class InputFormField extends StatelessWidget {
   final obscure;
   final hint;
   final textCapitalization;
-  final keyboardType;
+  final  keyboardType;
 
   @override
   Widget build(BuildContext context) {

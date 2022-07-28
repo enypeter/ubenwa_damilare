@@ -1,10 +1,9 @@
-
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../core/app_assets.dart';
 import '../../core/app_colors.dart';
-import 'sign_in.dart';
+import 'sign_in/sign_in_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({Key? key}) : super(key: key);
@@ -18,7 +17,6 @@ class _SplashScreenState extends State<SplashScreen> {
   void initState() {
     Future.delayed(
         const Duration(seconds: 3), () => Get.to(() => const SignInScreen()));
-
     super.initState();
   }
 
@@ -35,9 +33,8 @@ class _SplashScreenState extends State<SplashScreen> {
                 fontSize: 30),
           ),
         ),
-        decoration:  const BoxDecoration(
-            image: DecorationImage(
-                image: AssetImage(BACKGROUND))),
+        decoration: const BoxDecoration(
+            image: DecorationImage(image: AssetImage(BACKGROUND))),
       ),
     );
   }
