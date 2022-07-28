@@ -7,7 +7,8 @@ const String invalidPassword = 'Password should contain dot (.) and comma (,)';
 const String invalidEmailField =
     "Email provided isn\'t valid.Try another email address";
 const String passwordLengthError = 'Password length must be greater than 6';
-const String symbolRegex = r'^(?=.*?[.,]).{8,}$';
+const String dotRegex = r'^(?=.*?[.]).{8,}$';
+const String commaRegex = r'^(?=.*?[,]).{8,}$';
 const String emailRegex = '[a-zA-Z0-9\+\.\_\%\-\+]{1,256}' +
     '\\@' +
     '[a-zA-Z0-9][a-zA-Z0-9\\-]{0,64}' +

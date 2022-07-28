@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:get/get.dart';
+
 import '../../../controllers/user_controller.dart';
 import '../../../core/app_colors.dart';
 import '../../../core/consts.dart';
@@ -20,10 +22,17 @@ class SignInForm extends StatefulWidget {
 }
 
 class _SignInFormState extends State<SignInForm> {
+  final _storage = const FlutterSecureStorage();
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final _formKey = GlobalKey<FormState>();
   bool isObscure = true;
+
+  @override
+  initState(){
+    getUserEmail();
+    super.initState();
+  }
 
   IconButton _passwordVisibility() {
     return IconButton(
@@ -35,10 +44,17 @@ class _SignInFormState extends State<SignInForm> {
             color: AppColors.DISABLEDCOLOR));
   }
 
+  getUserEmail() async {
+    var email = await _storage.read(key: "email");
+    if (email != null) {
+      emailController.text = email;
+      setState(() {});
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
-  return Form(
+    return Form(
       key: _formKey,
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -54,8 +70,7 @@ class _SignInFormState extends State<SignInForm> {
           InputFormField(
             hint: 'example@gmail.com',
             controller: emailController,
-            validator: (value) =>
-                EmailValidator.validate(value),
+            validator: (value) => EmailValidator.validate(value),
           ),
           tinyVerticalSpace(),
           textBoxTitle('Password'),
@@ -64,8 +79,7 @@ class _SignInFormState extends State<SignInForm> {
             obscure: isObscure,
             controller: passwordController,
             suffixIcon: _passwordVisibility(),
-            validator: (value) =>
-                PasswordValidator.validate(value),
+            validator: (value) => PasswordValidator.validate(value),
           ),
           Align(
             alignment: Alignment.centerRight,
@@ -95,18 +109,14 @@ class _SignInFormState extends State<SignInForm> {
                 text: TextSpan(
                     style: TextStyle(
                         fontSize: 11,
-                        color: AppColors.PRIMARY,
+                        color: AppColors.GREY,
                         fontWeight: FontWeight.w500),
                     children: [
-                      TextSpan(
-                          text: 'Don\'t have an account? ',
-                          style:
-                          TextStyle(color: AppColors.GREY)),
+                      const TextSpan(text: 'Don\'t have an account? '),
                       TextSpan(
                           text: 'Sign up',
                           style: TextStyle(
-                              decoration:
-                              TextDecoration.underline,
+                              decoration: TextDecoration.underline,
                               color: AppColors.PRIMARY,
                               fontWeight: FontWeight.w600)),
                     ])),
@@ -120,18 +130,18 @@ class _SignInFormState extends State<SignInForm> {
     showLoading(context);
     var response = await AuthenticationServices.login(
         emailController.text, passwordController.text);
+
     Get.back();
     if (response is String) {
       SnackBars.showErrorSnackBar('Oops!', response);
     } else {
+      await _storage.write(key: "email", value: emailController.text);
       UserController userController =
-      Get.put(UserController(), permanent: true);
+          Get.put(UserController(), permanent: true);
       await userController.setUserDetails(response['user_info']);
       await userController.setToken(response['token']);
-      Get.offAll(() => const HomeScreen());
+      Get.offAll(() =>  HomeScreen());
       SnackBars.showSuccessSnackBar('Successful!', 'Welcome Chief');
-
     }
   }
-
 }

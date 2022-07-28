@@ -1,6 +1,29 @@
-
 class NewBornModel {
   NewBornModel({
+    required this.data,
+    required this.meta,
+    required this.links,
+  });
+
+  List<Datum> data;
+  Meta meta;
+  NewBornModelLinks links;
+
+  factory NewBornModel.fromJson(Map<String, dynamic> json) => NewBornModel(
+    data: List<Datum>.from(json["data"].map((x) => Datum.fromJson(x))),
+    meta: Meta.fromJson(json["meta"]),
+    links: NewBornModelLinks.fromJson(json["links"]),
+  );
+
+  Map<String, dynamic> toJson() => {
+    "data": List<dynamic>.from(data.map((x) => x.toJson())),
+    "meta": meta.toJson(),
+    "links": links.toJson(),
+  };
+}
+
+class Datum {
+  Datum({
     required this.id,
     required this.type,
     required this.links,
@@ -9,13 +32,13 @@ class NewBornModel {
 
   String id;
   String type;
-  Links links;
+  DatumLinks links;
   Attributes attributes;
 
-  factory NewBornModel.fromJson(Map<String, dynamic> json) => NewBornModel(
+  factory Datum.fromJson(Map<String, dynamic> json) => Datum(
     id: json["id"],
     type: json["type"],
-    links: Links.fromJson(json["links"]),
+    links: DatumLinks.fromJson(json["links"]),
     attributes: Attributes.fromJson(json["attributes"]),
   );
 
@@ -39,12 +62,12 @@ class Attributes {
   });
 
   String gender;
-  String gestation;
-  String firstCryPushDate;
+  String? gestation;
+  String? firstCryPushDate;
   String name;
   int userId;
-  DateTime createdAt;
-  DateTime updatedAt;
+  String createdAt;
+  String updatedAt;
 
   factory Attributes.fromJson(Map<String, dynamic> json) => Attributes(
     gender: json["gender"],
@@ -52,8 +75,8 @@ class Attributes {
     firstCryPushDate: json["first_cry_push_date"],
     name: json["name"],
     userId: json["user_id"],
-    createdAt: json["created_at"],
-    updatedAt: json["updated_at"],
+    createdAt: json["created_at"].toString(),
+    updatedAt:json["updated_at"].toString(),
   );
 
   Map<String, dynamic> toJson() => {
@@ -67,18 +90,54 @@ class Attributes {
   };
 }
 
-class Links {
-  Links({
+class DatumLinks {
+  DatumLinks({
     required this.self,
   });
 
   String self;
 
-  factory Links.fromJson(Map<String, dynamic> json) => Links(
+  factory DatumLinks.fromJson(Map<String, dynamic> json) => DatumLinks(
     self: json["self"],
   );
 
   Map<String, dynamic> toJson() => {
     "self": self,
+  };
+}
+
+class NewBornModelLinks {
+  NewBornModelLinks({
+    required this.first,
+    required this.last,
+  });
+
+  String first;
+  String last;
+
+  factory NewBornModelLinks.fromJson(Map<String, dynamic> json) => NewBornModelLinks(
+    first: json["first"],
+    last: json["last"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "first": first,
+    "last": last,
+  };
+}
+
+class Meta {
+  Meta({
+    required this.recordCount,
+  });
+
+  int recordCount;
+
+  factory Meta.fromJson(Map<String, dynamic> json) => Meta(
+    recordCount: json["record_count"],
+  );
+
+  Map<String, dynamic> toJson() => {
+    "record_count": recordCount,
   };
 }

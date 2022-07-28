@@ -33,8 +33,9 @@ class PasswordValidator {
       return passwordLengthError;
     }
 
-    final regExp = RegExp(symbolRegex);
-    if (regExp.hasMatch(value)) {
+    final regdotExp = RegExp(dotRegex);
+    final regcommaExp = RegExp(commaRegex);
+    if (regdotExp.hasMatch(value) && regcommaExp.hasMatch(value)) {
       return null;
     }
 

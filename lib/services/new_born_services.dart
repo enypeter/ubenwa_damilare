@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'api_docs.dart';
@@ -15,9 +17,14 @@ class NewBornServices {
         }
       }
     };
+    var isEnabled =
+    await const FlutterSecureStorage().read(key: "enableBackground");
+    log('$isEnabled');
+
+    if (isEnabled == 'true') {
     var token = await const FlutterSecureStorage().read(key: "token");
     return await ApiScheme.initialisePostRequest(
-        url: ApiDocs.newBornUrl, data: data, token: token, isNewBorn: true);
+        url: ApiDocs.newBornUrl, data: data, token: token, isNewBorn: true);}
   }
 
   static getNewBorn() async {

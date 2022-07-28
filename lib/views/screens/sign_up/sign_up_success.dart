@@ -54,7 +54,7 @@ class SuccessScreen extends StatelessWidget {
             ),
             SizedBox(height: height(context) * 0.2),
             GestureDetector(
-              onTap: () => Get.offAll(() => const HomeScreen()),
+              onTap: () => Get.offAll(() =>  HomeScreen()),
               child: Column(
                 children: [
                   Container(

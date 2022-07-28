@@ -1,4 +1,5 @@
 import 'dart:async';
+import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
@@ -47,19 +48,17 @@ void onStart(ServiceInstance service) async {
     service.stopSelf();
   });
 
-  var isEnabled =
-      await const FlutterSecureStorage().read(key: "enableBackground");
-  if (isEnabled == 'true') {
-    Timer.periodic(const Duration(minutes: 20), (timer) async {
+  log('Background service enabled');
+    Timer.periodic(const Duration(seconds: 5), (timer) async {
       if (service is AndroidServiceInstance) {
         service.setForegroundNotificationInfo(
           title: "My App Service",
           content: "Updated at ${DateTime.now()}",
         );
       }
-      NewBornController babyController = Get.put(NewBornController());
+
       await NewBornServices.createNewBorn();
-      await babyController.setNewBorn();
     });
-  }
+
+
 }

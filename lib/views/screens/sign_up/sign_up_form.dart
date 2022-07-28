@@ -62,7 +62,37 @@ class _SignUpFormState extends State<SignUpForm> {
             obscure: isObscure,
             suffixIcon: _passwordVisibility(),
             validator: (value) => PasswordValidator.validate(value),
-          ),
+          ),          tinyVerticalSpace(),
+
+          RichText(
+              textAlign: TextAlign.center,
+              text: TextSpan(
+                  style: TextStyle(
+                      fontSize: 10,
+                      color: AppColors.GREY,
+                      fontWeight: FontWeight.w500),
+                  children: [
+                    const TextSpan(
+                        text:
+                        'By entering your details, your are agreeing to our '),
+                    TextSpan(
+                        text: 'Terms of Service',
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            color: AppColors.PRIMARY,
+                            fontWeight: FontWeight.w600)),
+                    const TextSpan(
+                        text: ' and '),
+                    TextSpan(
+                        text: 'Privacy Policy',
+                        style: TextStyle(
+                            decoration: TextDecoration.underline,
+                            color: AppColors.PRIMARY,
+                            fontWeight: FontWeight.w600)),
+                    const TextSpan(
+                        text: ' Thanks'),
+                  ])),
+
           SizedBox(height: height(context) * 0.03),
           Button(
               text: 'Sign up',
@@ -73,39 +103,27 @@ class _SignUpFormState extends State<SignUpForm> {
               }),
           SizedBox(height: height(context) * 0.08),
           GestureDetector(
-            onTap: () {},
+            onTap: () => Get.back(),
             child: RichText(
                 textAlign: TextAlign.center,
                 text: TextSpan(
                     style: TextStyle(
                         fontSize: 11,
-                        color: AppColors.PRIMARY,
+                        color: AppColors.GREY,
                         fontWeight: FontWeight.w500),
                     children: [
+                      const TextSpan(
+                          text: 'Already have an account? '),
                       TextSpan(
-                          text:
-                              'By entering your details, your are agreeing to our ',
-                          style: TextStyle(color: AppColors.GREY)),
-                      TextSpan(
-                          text: 'Terms of Service',
+                          text: 'Login',
                           style: TextStyle(
-                              decoration: TextDecoration.underline,
+                              decoration:
+                              TextDecoration.underline,
                               color: AppColors.PRIMARY,
                               fontWeight: FontWeight.w600)),
-                      TextSpan(
-                          text: ' and ',
-                          style: TextStyle(color: AppColors.GREY)),
-                      TextSpan(
-                          text: 'Privacy Policy',
-                          style: TextStyle(
-                              decoration: TextDecoration.underline,
-                              color: AppColors.PRIMARY,
-                              fontWeight: FontWeight.w600)),
-                      TextSpan(
-                          text: ' Thanks',
-                          style: TextStyle(color: AppColors.GREY)),
                     ])),
           ),
+
         ],
       ),
     );
@@ -120,7 +138,6 @@ class _SignUpFormState extends State<SignUpForm> {
                 : Icons.visibility_off_outlined,
             color: AppColors.DISABLEDCOLOR));
   }
-
   Future signUp() async {
     showLoading(context);
     var response = await AuthenticationServices.register(
