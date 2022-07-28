@@ -25,14 +25,11 @@ class _SplashScreenState extends State<SplashScreen> {
     return Scaffold(
       body: Container(
         child: Center(
-          child: Text(
-            'Test App',
-            style: TextStyle(
-                color: AppColors.TEXTCOLOR,
-                fontWeight: FontWeight.w700,
-                fontSize: 30),
-          ),
-        ),
+            child: Text('Test App',
+                style: TextStyle(
+                    color: AppColors.TEXTCOLOR,
+                    fontWeight: FontWeight.w700,
+                    fontSize: 30))),
         decoration: const BoxDecoration(
             image: DecorationImage(image: AssetImage(BACKGROUND))),
       ),

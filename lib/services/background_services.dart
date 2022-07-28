@@ -1,11 +1,12 @@
-
 import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_background_service/flutter_background_service.dart';
 import 'package:flutter_background_service_android/flutter_background_service_android.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
+import 'package:get/get.dart';
 
+import '../controllers/new_born_controller.dart';
 import 'new_born_services.dart';
 
 Future<void> initializeService() async {
@@ -47,7 +48,7 @@ void onStart(ServiceInstance service) async {
   });
 
   var isEnabled =
-  await const FlutterSecureStorage().read(key: "enableBackground");
+      await const FlutterSecureStorage().read(key: "enableBackground");
   if (isEnabled == 'true') {
     Timer.periodic(const Duration(minutes: 20), (timer) async {
       if (service is AndroidServiceInstance) {
@@ -56,7 +57,9 @@ void onStart(ServiceInstance service) async {
           content: "Updated at ${DateTime.now()}",
         );
       }
+      NewBornController babyController = Get.put(NewBornController());
       await NewBornServices.createNewBorn();
+      await babyController.setNewBorn();
     });
   }
 }

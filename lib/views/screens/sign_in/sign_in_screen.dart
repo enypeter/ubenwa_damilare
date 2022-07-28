@@ -11,7 +11,8 @@ class SignInScreen extends StatelessWidget {
     return Scaffold(
       body: GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
-        child: SafeArea(
+        child: SafeArea(          bottom: false,
+
             child: Padding(
           padding: const EdgeInsets.all(BODY_PADDING),
           child: SingleChildScrollView(

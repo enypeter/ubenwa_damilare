@@ -9,14 +9,14 @@ class NewBornController extends GetxController {
 
   getNewBorn(token) {
     if (newBornList == null || newBornList!.isEmpty) {
-      return setNewBorn(token);
+      return setNewBorn();
     } else {
       return newBornList;
     }
   }
 
-  setNewBorn(token) async {
-    var response = await NewBornServices.getNewBorn(token);
+  setNewBorn() async {
+    var response = await NewBornServices.getNewBorn();
     if (response is String) {
       return newBornList = null;
     } else {
