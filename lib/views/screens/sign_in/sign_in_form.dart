@@ -128,7 +128,6 @@ class _SignInFormState extends State<SignInForm> {
       Get.put(UserController(), permanent: true);
       await userController.setUserDetails(response['user_info']);
       await userController.setToken(response['token']);
-      await userController.setUserId(response['user_id']);
       Get.offAll(() => const HomeScreen());
       SnackBars.showSuccessSnackBar('Successful!', 'Welcome Chief');
 

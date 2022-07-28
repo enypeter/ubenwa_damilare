@@ -19,21 +19,19 @@ class _HomeScreenState extends State<HomeScreen> {
   UserController userController = Get.find();
   final _storage = const FlutterSecureStorage();
   NewBornController babyController = Get.put(NewBornController());
-  String token = '';
   String name = '';
   bool isEnableBackground = false;
   var newBabies;
 
   @override
   void initState() {
-    token = userController.getToken();
     name = userController.getUser()!.firstName;
     getNewBabies();
     super.initState();
   }
 
   getNewBabies() async {
-    var data = await babyController.setNewBorn(token);
+    var data = await babyController.setNewBorn();
     newBabies = data;
     setState(() {});
   }

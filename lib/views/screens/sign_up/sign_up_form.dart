@@ -136,7 +136,6 @@ class _SignUpFormState extends State<SignUpForm> {
           Get.put(UserController(), permanent: true);
       await userController.setUserDetails(response['user_info']);
       await userController.setToken(response['token']);
-      await userController.setUserId(response['user_id']);
       Get.offAll(() => const SuccessScreen());
     }
   }

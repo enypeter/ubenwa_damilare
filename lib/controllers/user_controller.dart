@@ -12,12 +12,6 @@ class UserController extends GetxController{
     return user;
   }
 
-  getToken() {
-    return token;
-  }
-  getUserId() {
-    return userId;
-  }
 
   setUserDetails(response) async {
     UserModel user = UserModel.fromJson(response);
@@ -28,7 +22,6 @@ class UserController extends GetxController{
     await const FlutterSecureStorage().write(key:"token", value: token);
     this.token = token;
   }
-  setUserId(userId)async{
-    this.userId = userId;
-  }
+
+
 }
