@@ -19,7 +19,6 @@ class NewBornServices {
     };
     var isEnabled =
     await const FlutterSecureStorage().read(key: "enableBackground");
-    log('$isEnabled');
 
     if (isEnabled == 'true') {
     var token = await const FlutterSecureStorage().read(key: "token");
