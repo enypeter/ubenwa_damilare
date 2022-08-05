@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-import '../views/widgets/snackbar.dart';
 import 'api_docs.dart';
 import 'internet_services.dart';
 
@@ -10,6 +8,7 @@ class ApiScheme {
       isNewBorn,
       required String url,
       token}) async {
+    print(url);
     if (await InternetServices.checkConnectivity()) {
       try {
         var response = await ApiDocs.makePostRequest(

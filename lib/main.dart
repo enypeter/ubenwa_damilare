@@ -7,6 +7,7 @@ import 'views/screens/splash_screen.dart';
 
 
 void main() async {
+
   WidgetsFlutterBinding.ensureInitialized();
   await initializeService();
   SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]).then(

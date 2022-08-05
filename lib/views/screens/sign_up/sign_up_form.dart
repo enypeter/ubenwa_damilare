@@ -45,7 +45,13 @@ class _SignUpFormState extends State<SignUpForm> {
             hint: 'Jane Doe',
             controller: nameController,
             textCapitalization: TextCapitalization.words,
-            validator: (value) => FieldValidator.validate(value),
+            validator: (value) {
+              if (value.isEmpty) {
+                return 'Name must not be empty';
+              } else if (value.toString().split(' ').length<2) {
+                return 'You should enter more than a name';
+              }
+            },
           ),
           tinyVerticalSpace(),
           textBoxTitle('Email'),
@@ -62,8 +68,8 @@ class _SignUpFormState extends State<SignUpForm> {
             obscure: isObscure,
             suffixIcon: _passwordVisibility(),
             validator: (value) => PasswordValidator.validate(value),
-          ),          tinyVerticalSpace(),
-
+          ),
+          tinyVerticalSpace(),
           RichText(
               textAlign: TextAlign.center,
               text: TextSpan(
@@ -74,29 +80,27 @@ class _SignUpFormState extends State<SignUpForm> {
                   children: [
                     const TextSpan(
                         text:
-                        'By entering your details, your are agreeing to our '),
+                            'By entering your details, your are agreeing to our '),
                     TextSpan(
                         text: 'Terms of Service',
                         style: TextStyle(
                             decoration: TextDecoration.underline,
                             color: AppColors.PRIMARY,
                             fontWeight: FontWeight.w600)),
-                    const TextSpan(
-                        text: ' and '),
+                    const TextSpan(text: ' and '),
                     TextSpan(
                         text: 'Privacy Policy',
                         style: TextStyle(
                             decoration: TextDecoration.underline,
                             color: AppColors.PRIMARY,
                             fontWeight: FontWeight.w600)),
-                    const TextSpan(
-                        text: ' Thanks'),
+                    const TextSpan(text: ' Thanks'),
                   ])),
-
           SizedBox(height: height(context) * 0.03),
           Button(
               text: 'Sign up',
               onTap: () {
+
                 if (_formKey.currentState!.validate()) {
                   signUp();
                 }
@@ -112,18 +116,15 @@ class _SignUpFormState extends State<SignUpForm> {
                         color: AppColors.GREY,
                         fontWeight: FontWeight.w500),
                     children: [
-                      const TextSpan(
-                          text: 'Already have an account? '),
+                      const TextSpan(text: 'Already have an account? '),
                       TextSpan(
                           text: 'Login',
                           style: TextStyle(
-                              decoration:
-                              TextDecoration.underline,
+                              decoration: TextDecoration.underline,
                               color: AppColors.PRIMARY,
                               fontWeight: FontWeight.w600)),
                     ])),
           ),
-
         ],
       ),
     );
@@ -143,7 +144,7 @@ class _SignUpFormState extends State<SignUpForm> {
     showLoading(context);
     var response = await AuthenticationServices.register(
         firstName: nameController.text.split(' ').first,
-        lastName: nameController.text.split(' ')[1],
+        lastName: nameController.text.split(' ')[1].toString(),
         email: emailController.text,
         password: passwordController.text);
     print(response);

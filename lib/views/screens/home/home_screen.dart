@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:get/get.dart';
 import 'package:ubenwa_damilare/controllers/new_born_controller.dart';
 import 'package:ubenwa_damilare/core/app_colors.dart';
@@ -13,6 +14,13 @@ class HomeScreen extends StatelessWidget {
   UserController userController = Get.find();
   NewBornController babyController = Get.put(NewBornController());
   String name = '';
+  String token = '';
+  static const backgroundService = MethodChannel('com.ubenwa/damilare');
+
+  Future toggleBackgroundService()async{
+    var arguments = {'token':token};
+    await backgroundService.invokeMethod('enableBackgroundService',arguments);
+  }
 
   @override
   Widget build(BuildContext context) {

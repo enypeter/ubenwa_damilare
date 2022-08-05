@@ -23,6 +23,27 @@ class FieldValidator {
   }
 }
 
+class FullNameValidator {
+  static String? validate(String value) {
+    if (value.isEmpty) {
+      return emptyTextField;
+    }
+
+    final regExp = RegExp(fullNameRegex);
+    if (regExp.hasMatch(value)) {
+      return invalidName;
+    }
+
+    if(value.split(' ').length<2){
+      return fullNameLength;
+
+    }
+
+    return null;
+
+  }
+}
+
 class PasswordValidator {
   static String? validate(String value) {
     if (value.isEmpty) {

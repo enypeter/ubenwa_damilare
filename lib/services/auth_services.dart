@@ -17,7 +17,9 @@ class AuthenticationServices {
       "first_name": firstName,
       "last_name": lastName,
     };
+
+    print(data);
     return await ApiScheme.initialisePostRequest(
-        url: ApiDocs.signUpUrl, data: data);
+        url: 'ApiDocs.signUpUrl', data: data);
   }
 }
